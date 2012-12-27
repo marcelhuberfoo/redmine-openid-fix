@@ -1,8 +1,8 @@
 require_dependency 'account_controller'
-
-module OpenidAccountControllerPatch
-
-    def self.included(base)
+module Openid
+  module Patches
+    module OpenidAccountControllerPatch
+      def self.included(base) # :nodoc:
         base.extend(ClassMethods)
         base.send(:include, InstanceMethods)
         base.class_eval do
@@ -10,12 +10,10 @@ module OpenidAccountControllerPatch
 
             alias_method :open_id_authenticate, :fixed_open_id_authenticate
         end
-    end
+      end
 
-    module ClassMethods
-    end
-
-    module InstanceMethods
+      # Instance methods are here
+      module InstanceMethods
 
         OPENID_AX_EMAIL     = 'http://axschema.org/contact/email'
         OPENID_AX_FIRSTNAME = 'http://axschema.org/namePerson/first'
@@ -123,7 +121,7 @@ module OpenidAccountControllerPatch
                 end
             end
         end
-
+      end
     end
-
+  end
 end
