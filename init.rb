@@ -1,12 +1,18 @@
 require 'redmine'
-require 'dispatcher'
+require 'dispatcher' unless Rails::VERSION::MAJOR >= 3
 
-RAILS_DEFAULT_LOGGER.info 'Starting OpenID Fix plugin for Redmine'
-
-Dispatcher.to_prepare :openid_fix_plugin do
+if Rails::VERSION::MAJOR >= 3
+  ActionDispatch::Callbacks.to_prepare do
+    # use require_dependency if you plan to utilize development mode
+    require_dependency 'openid_account_controller_patch'
+  end
+else
+  RAILS_DEFAULT_LOGGER.info 'Starting OpenID Fix plugin for Redmine'
+  Dispatcher.to_prepare :openid_fix_plugin do
     unless AccountController.included_modules.include?(OpenidAccountControllerPatch)
         AccountController.send(:include, OpenidAccountControllerPatch)
     end
+  end
 end
 
 Redmine::Plugin.register :openid_fix_plugin do
