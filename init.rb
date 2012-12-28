@@ -5,7 +5,7 @@ if Rails::VERSION::MAJOR >= 3
   Rails.logger.info 'Starting OpenID Fix plugin for Redmine'
   ActionDispatch::Callbacks.to_prepare do
     # use require_dependency if you plan to utilize development mode
-    require_dependency 'openid_account_controller_patch'
+    require 'openid_account_controller_patch'
   end
 else
   RAILS_DEFAULT_LOGGER.info 'Starting OpenID Fix plugin for Redmine'
