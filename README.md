@@ -1,6 +1,7 @@
 redmine-openid-fix
 ==================
 
-The popular redmine plugin, to be compatible with Redmine 2+
+git clone of the popular redmine plugin, by andriy lesyuk: http://projects.andriylesyuk.com/projects/openid-fix
 
-Currently the plugin is not working: just redirects to Redmine login without errors. Any help (ex. PRs) is greatly appreciated!
+Compatible with Redmine 2+
+
